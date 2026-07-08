@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=14,6366f1,a855f7&height=220&section=header&text=AIBIN%20BABU&fontSize=60&fontAlign=50&fontAlignY=35" alt="Aibin Babu Header Banner" />
 </p>
@@ -194,8 +193,8 @@ Engineered a comprehensive inventory tracking solution featuring dedicated admin
 ## 📊 GitHub Analytics
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Aibin-35&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="Aibin's Github Stats" width="48%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Aibin-35&layout=compact&theme=tokyonight&hide_border=true" alt="Aibin's Top Languages" width="48%" />
+  <img src="https://github-stats-extended.vercel.app/api?username=Aibin-35&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="Aibin's Github Stats" width="48%" />
+  <img src="https://github-stats-extended.vercel.app/api/top-langs/?username=Aibin-35&layout=compact&theme=tokyonight&hide_border=true" alt="Aibin's Top Languages" width="48%" />
 </p>
 
 ---
@@ -203,7 +202,7 @@ Engineered a comprehensive inventory tracking solution featuring dedicated admin
 ## 🏆 Stats & Trophy Section
 
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Aibin-35&theme=tokyonight&column=7&margin-w=15&margin-h=15" alt="Github Trophies" />
+  <img src="https://github-profile-trophy-winning.vercel.app/?username=Aibin-35&theme=tokyonight&column=7&margin-w=15&margin-h=15" alt="Github Trophies" />
 </p>
 
 ---
@@ -224,32 +223,45 @@ Engineered a comprehensive inventory tracking solution featuring dedicated admin
   <img src="https://raw.githubusercontent.com/Aibin-35/Aibin-35/output/github-contribution-grid-snake.svg" alt="github contribution grid snake animation" />
 </p>
 
----
+<details>
+<summary>⚙️ <b>Click here to configure this animation in your repository</b></summary>
+<br>
 
-## 🎯 Current Focus
+For the snake animation to render, you must configure a GitHub Actions workflow that runs periodically to generate the `.svg` graphic in your repository.
 
-* **Open source contribution:** Optimizing React core components & developing robust frontend boilerplate architectures.
-* **Learning:** Deep Learning Models, Artificial Intelligence Pipelines, and Cloud Computing (AWS Solutions Architecture).
-* **Building:** Next.js enterprise portals and REST/GraphQL backend configurations.
-* **Exploring:** Low-latency WebSockets networking and system scaling limits.
-* **Open To:** Full-stack engineering internships, research collaborations, and open-source projects.
+1. In your GitHub repository, create a directory path: `.github/workflows/`
+2. Create a file named `snake.yml` inside that folder.
+3. Paste the following configuration code into the file and commit:
 
----
+```yaml
+name: Generate Snake
 
-## 📞 Contact
+on:
+  schedule:
+    - cron: "0 */12 * * *" # Runs every 12 hours
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-* 📧 **Email:** [aibinniravathu@gmail.com](mailto:aibinniravathu@gmail.com)
-* 💼 **LinkedIn:** [/in/aibin-babu-8982a3328](https://linkedin.com/in/aibin-babu-8982a3328)
-* 🐦 **Twitter:** [Follow @AibinBabu](https://twitter.com/)
-* 🌐 **Portfolio:** [Aibin's Dev Showcase](https://github.com/Aibin-35)
-
----
-
-<p align="center">
-  <i>"Code is the architecture of imagination, engineered into reality."</i>
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=14,6366f1,a855f7&height=120&section=footer" alt="Aibin Babu Footer Banner" />
-</p>
-```
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Generate github-contribution-grid-snake.svg
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            
+      - name: Push github-contribution-grid-snake.svg to the output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
